@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class Peanut {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        String[] userList = new String[100];
+        int x = 0;
         /*String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -21,8 +23,16 @@ public class Peanut {
 
 
             }
+            if(userInput.equals("list")) {
+                for (int i = 0 ; i < x  ; i ++) {
+                    System.out.println( (i+1) + ": " + userList[i]);
+                }
+            }
             else {
-                System.out.println(userInput);
+
+                System.out.println("added: " + userInput);
+                userList[x] = userInput;
+                x++;
             }
         }
 
