@@ -1,0 +1,6 @@
+todo drink water
+deadline finish IP /by Friday
+event drink water /from Sat 3pm /to 4pm
+list
+mark 1
+unmark 1

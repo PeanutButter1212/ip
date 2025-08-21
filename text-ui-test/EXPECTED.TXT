@@ -1,7 +1,19 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+Hello! I'm Peanut
+What can I do for you?
+Got it. I've added this task:
+[T] [ ] drink water
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+[D] [ ] finish IP (by: Friday)
+Now you have 2 tasks in the list.
+Got it. I've added this task:
+[E] [ ] drink water (from: Sat 3pm to: 4pm)
+Now you have 3 tasks in the list.
+Here are the tasks in your list:
+1. [T] [ ] drink water
+2. [D] [ ] finish IP (by: Friday)
+3. [E] [ ] drink water (from: Sat 3pm to: 4pm)
+Nice! I've marked this task as done:
+[T] [X] drink water
+OK, I've marked this task as not done yet:
+[T] [ ] drink water

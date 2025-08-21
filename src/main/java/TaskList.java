@@ -11,7 +11,7 @@ public class TaskList {
     public void add(Task task) {
         tasks.add(task);
         System.out.println(task);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list");
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     public void list() {
