@@ -38,4 +38,10 @@ public class TaskList {
         return tasks.size();
     }
 
+    public void delete(int taskNumber) {
+        System.out.println("Noted. I've removed this task:");
+        tasks.remove(taskNumber);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    }
+
 }
