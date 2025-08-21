@@ -10,6 +10,7 @@ public class TaskList {
 
     public void add(Task task) {
         tasks.add(task);
+        System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
@@ -31,6 +32,10 @@ public class TaskList {
         tasks.get(index).unmark();
         System.out.println("OK, I've marked this task as not done yet:");
         System.out.println(tasks.get(index));
+    }
+
+    public int size() {
+        return tasks.size();
     }
 
 }
