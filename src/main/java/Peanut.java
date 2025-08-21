@@ -26,6 +26,7 @@ public class Peanut {
 
             }
             else if(userInput.equals("list")) {
+                System.out.println("Here are the tasks in your list: ");
                 for (int i = 0 ; i < tasks.size()  ; i ++) {
                     System.out.println((i+1) + ". " + tasks.get(i).toString());
                 }
@@ -48,6 +49,41 @@ public class Peanut {
                 System.out.println(tasks.get(taskNumber).toString());
 
 
+            }
+            else if (userInput.startsWith("todo")) {
+                System.out.println("Got it. I've added this task:");
+                String[] parts= userInput.split("\\s+", 2);
+                String task = parts[1];
+                Task todoTask = new ToDo(task);
+                System.out.println(todoTask);
+                System.out.println("Now you have " + (tasks.size() + 1) + " tasks in the list");
+                tasks.add(todoTask);
+            }
+
+            else if (userInput.startsWith("deadline")) {
+                System.out.println("Got it. I've added this task:");
+                String[] parts = userInput.split("\\s+", 2);
+                String[] sep = parts[1].split("/by", 2);
+                String task = sep[0];
+                String deadline = sep[1];
+                Task deadlineTask = new Deadline(task, deadline );
+                System.out.println(deadlineTask);
+                System.out.println("Now you have " + (tasks.size() + 1) + " tasks in the list");
+                tasks.add(deadlineTask);
+            }
+
+            else if (userInput.startsWith("event")) {
+                System.out.println("Got it. I've added this task:");
+                String[] parts = userInput.split("\\s+", 2);
+                String[] sep = parts[1].split("/from", 2);
+                String[] sep2 = sep[1].split("/to",2);
+                String task = sep[0];
+                String deadline = sep2[1];
+                String startDate = sep2[0];
+                Task eventTask = new Event(task, deadline,startDate );
+                System.out.println(eventTask);
+                System.out.println("Now you have " + (tasks.size() + 1) + " tasks in the list");
+                tasks.add(eventTask);
             }
 
             else {
