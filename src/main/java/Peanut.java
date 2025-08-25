@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Peanut {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        String filePath = "./data/peanut.txt";
         Storage storage = new Storage(Paths.get("data", "peanut.txt").toString());
         TaskList taskList = new TaskList(storage.load());
 
