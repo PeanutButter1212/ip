@@ -8,27 +8,29 @@ import java.util.Scanner;
 
 
 public class Peanut {
+
+
     public static void main(String[] args) {
+        Ui ui = new Ui();
         Scanner sc = new Scanner(System.in);
         Storage storage = new Storage(Paths.get("data", "peanut.txt").toString());
         TaskList taskList = new TaskList(storage.load());
 
 
+        ui.welcomeMessage();
 
 
-        System.out.println("Hello! I'm Peanut\n" +
-                "What can I do for you?" );
 
 
         while (true) {
-            String userInput = sc.nextLine();
+            String userInput = ui.readCommand();
             try {
                 if (userInput.equals("bye")) {
-                    System.out.println("Bye. Hope to see you again soon!");
+                    ui.byeMessage();
                     break;
 
                 } else if (userInput.equals("list")) {
-                    taskList.list();
+                    ui.showList(taskList);
 
                 } else if (userInput.startsWith("mark")) {
                     String[] parts = userInput.split(" ", 2);
@@ -44,6 +46,7 @@ public class Peanut {
                     int taskNumber = Integer.parseInt(parts[1]) - 1;
                     taskList.mark(taskNumber);
                     storage.save(taskList);
+                    ui.markList(taskList.getTasks().get(taskNumber));
 
                 } else if (userInput.startsWith("unmark")) {
                     String[] parts = userInput.split(" ", 2);
@@ -59,6 +62,7 @@ public class Peanut {
                     int taskNumber = Integer.parseInt(parts[1]) - 1;
                     taskList.unmark(taskNumber);
                     storage.save(taskList);
+                    ui.unmarkList(taskList.getTasks().get(taskNumber));
 
                 } else if (userInput.startsWith("todo")) {
                     String[] parts = userInput.split("\\s+", 2);
@@ -70,6 +74,7 @@ public class Peanut {
                     Task todoTask = new ToDo(parts[1]);
                     taskList.add(todoTask);
                     storage.save(taskList);
+                    ui.addList(todoTask,taskList.size());
 
                 } else if (userInput.startsWith("deadline")) {
                     String[] parts = userInput.split("\\s+", 2);
@@ -92,6 +97,7 @@ public class Peanut {
                         Task deadlineTask = new Deadline(task, deadlineStr);
                         taskList.add(deadlineTask);
                         storage.save(taskList);
+                        ui.addList(deadlineTask,taskList.size());
                     } catch (DateTimeParseException e) {
                         throw new PeanutException("Please enter dates in yyyy-MM-dd format (e.g. 2019-10-15)!!!");
                     }
@@ -129,6 +135,7 @@ public class Peanut {
                         Task eventTask = new Event(task, deadlineStr, startDateStr);
                         taskList.add(eventTask);
                         storage.save(taskList);
+                        ui.addList(eventTask,taskList.size());
                     } catch (DateTimeParseException e) {
                         throw new PeanutException("Please enter dates in yyyy-MM-dd format (e.g. 2019-10-15)!!!");
                     }
@@ -141,13 +148,14 @@ public class Peanut {
                     }
                     taskList.delete(Integer.parseInt(parts[1])-1);
                     storage.save(taskList);
+                    ui.deleteList(taskList);
                 } else {
                   throw new PeanutException("Sorry idk wat u saying bro");
                 }
             }
 
          catch (PeanutException error) {
-             System.out.println(error.getMessage());
+             ui.showError(error.getMessage());
         }
 
 
