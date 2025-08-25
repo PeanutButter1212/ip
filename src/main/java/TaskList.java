@@ -8,6 +8,10 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    public TaskList() {
+        this.tasks = tasks;
+    }
+
     public void add(Task task) {
         tasks.add(task);
     }
