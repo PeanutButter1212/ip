@@ -1,3 +1,4 @@
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 
@@ -6,9 +7,16 @@ import java.util.Scanner;
 public class Peanut {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        TaskList taskList = new TaskList();
+        String filePath = "./data/peanut.txt";
+        Storage storage = new Storage(Paths.get("data", "peanut.txt").toString());
+        TaskList taskList = new TaskList(storage.load());
+
+
+
+
         System.out.println("Hello! I'm Peanut\n" +
                 "What can I do for you?" );
+
 
         while (true) {
             String userInput = sc.nextLine();
@@ -33,6 +41,7 @@ public class Peanut {
 
                     int taskNumber = Integer.parseInt(parts[1]) - 1;
                     taskList.mark(taskNumber);
+                    storage.save(taskList);
 
                 } else if (userInput.startsWith("unmark")) {
                     String[] parts = userInput.split(" ", 2);
@@ -47,6 +56,7 @@ public class Peanut {
 
                     int taskNumber = Integer.parseInt(parts[1]) - 1;
                     taskList.unmark(taskNumber);
+                    storage.save(taskList);
 
                 } else if (userInput.startsWith("todo")) {
                     String[] parts = userInput.split("\\s+", 2);
@@ -57,6 +67,7 @@ public class Peanut {
 
                     Task todoTask = new ToDo(parts[1]);
                     taskList.add(todoTask);
+                    storage.save(taskList);
 
                 } else if (userInput.startsWith("deadline")) {
                     String[] parts = userInput.split("\\s+", 2);
@@ -75,6 +86,7 @@ public class Peanut {
                     String deadline = sep[1];
                     Task deadlineTask = new Deadline(task, deadline);
                     taskList.add(deadlineTask);
+                    storage.save(taskList);
 
                 } else if (userInput.startsWith("event")) {
                     String[] parts = userInput.split("\\s+", 2);
@@ -104,6 +116,7 @@ public class Peanut {
                     String startDate = sep2[0];
                     Task eventTask = new Event(task, deadline, startDate);
                     taskList.add(eventTask);
+                    storage.save(taskList);
 
                 }
                 else if (userInput.startsWith("delete")){
@@ -112,6 +125,7 @@ public class Peanut {
                         throw new PeanutException("Please enter a valid number!!");
                     }
                     taskList.delete(Integer.parseInt(parts[1])-1);
+                    storage.save(taskList);
                 } else {
                   throw new PeanutException("Sorry idk wat u saying bro");
                 }
