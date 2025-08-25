@@ -1,5 +1,8 @@
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
 
 
 
@@ -82,10 +85,16 @@ public class Peanut {
                     }
 
                     String task = sep[0];
-                    String deadline = sep[1];
-                    Task deadlineTask = new Deadline(task, deadline);
-                    taskList.add(deadlineTask);
-                    storage.save(taskList);
+                    String deadlineStr = sep[1].trim();
+
+                    try {
+                        LocalDate deadline = LocalDate.parse(deadlineStr);
+                        Task deadlineTask = new Deadline(task, deadlineStr);
+                        taskList.add(deadlineTask);
+                        storage.save(taskList);
+                    } catch (DateTimeParseException e) {
+                        throw new PeanutException("Please enter dates in yyyy-MM-dd format (e.g. 2019-10-15)!!!");
+                    }
 
                 } else if (userInput.startsWith("event")) {
                     String[] parts = userInput.split("\\s+", 2);
@@ -109,13 +118,20 @@ public class Peanut {
                         throw new PeanutException("The description/time of start and deadline " +
                                 "cannot be empty!! (e.g event project meeting /from Mon 2pm /to 4pm)");
                     }
-
                     String task = sep[0];
-                    String deadline = sep2[1];
-                    String startDate = sep2[0];
-                    Task eventTask = new Event(task, deadline, startDate);
-                    taskList.add(eventTask);
-                    storage.save(taskList);
+                    String deadlineStr = sep2[1].trim();
+                    String startDateStr = sep2[0].trim();
+
+                    try {
+                        LocalDate startDate = LocalDate.parse(startDateStr);
+                        LocalDate deadline = LocalDate.parse(deadlineStr);
+
+                        Task eventTask = new Event(task, deadlineStr, startDateStr);
+                        taskList.add(eventTask);
+                        storage.save(taskList);
+                    } catch (DateTimeParseException e) {
+                        throw new PeanutException("Please enter dates in yyyy-MM-dd format (e.g. 2019-10-15)!!!");
+                    }
 
                 }
                 else if (userInput.startsWith("delete")){
