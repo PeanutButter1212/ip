@@ -4,8 +4,8 @@ import java.util.List;
 public class TaskList {
     private List<Task> tasks;
 
-    public TaskList() {
-        this.tasks = new ArrayList<>();
+    public TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public void add(Task task) {
@@ -20,6 +20,10 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i + 1) + ". " + tasks.get(i));
         }
+    }
+
+    public List<Task> getTasks() {
+        return this.tasks;
     }
 
     public void mark(int index) {
