@@ -1,4 +1,4 @@
-package Peanut;
+package peanut;
 
 public class Task {
     protected String description;

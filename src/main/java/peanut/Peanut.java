@@ -1,4 +1,4 @@
-package Peanut;
+package peanut;
 
 public class Peanut {
     private Storage storage;

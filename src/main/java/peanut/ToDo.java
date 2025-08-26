@@ -1,4 +1,4 @@
-package Peanut;
+package peanut;
 
 public class ToDo extends Task {
     public ToDo(String description) {

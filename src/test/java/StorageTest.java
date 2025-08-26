@@ -1,4 +1,4 @@
-import Peanut.*;
+import peanut.*;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
