@@ -11,8 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StorageTest {
 
+    //temp directory to use for testing so it dosent mess up actual
     @TempDir
-    Path tempDir;//temp directory to use for testing so it dosent mess up actual
+    Path tempDir;
 
     @Test
     public void saveAndLoad_Success() {
@@ -25,11 +26,11 @@ public class StorageTest {
                 new Event("sleep more", "2025-11-06", "2025-11-05")
         ));
 
-        // Act: save tasks, then load them back
+
         storage.save(list);
         List<Task> loaded = storage.load();
 
-        // Assert: check sizes and contents
+
         assertEquals(3, loaded.size());
         assertTrue(loaded.get(0) instanceof ToDo);
         assertTrue(loaded.get(1) instanceof Deadline);

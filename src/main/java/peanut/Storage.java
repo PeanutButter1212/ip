@@ -8,12 +8,27 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * The Storage class handles file saving and loading
+ * It is responsible for saving TaskList into a txt file and
+ * loading the txt file when run
+ */
 public class Storage {
     private String filePath;
-
+    /**
+     * Creates storage object with given filepath
+     *
+     * @param filePath path to the file for saving/loading
+     */
     public Storage (String filePath) {
         this.filePath = filePath;
     }
+    /**
+     * Loads task from file into a list of tasks
+     * If file/folder does not exist, empty list is returned
+     *
+     * @return A list of task loaded from the file/empty list
+     */
     public List<Task> load() {
         File folder = new File("./data");
         if (!folder.exists()) {
@@ -42,7 +57,12 @@ public class Storage {
     }
 
 
-
+    /**
+     * Saves task from current list into file
+     * Overrides existing file with new contents
+     *
+     * @param taskList List of tasks that needs to be saved into file
+     */
     public void save(TaskList taskList) {
         File folder = new File("./data");
         if (!folder.exists()) {
