@@ -1,5 +1,6 @@
 package peanut;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Ui {
@@ -49,12 +50,24 @@ public class Ui {
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
 
-    public void showError(String msg) {
-        System.out.println(msg);
+    /**
+     * Displays the list of tasks that users search for
+     *
+     * @param matches the List of tasks that users search for
+     */
+    public void showMatches(List<Task> matches) {
+        if (matches.isEmpty()) {
+            System.out.println("no results found :(");
+        } else {
+            System.out.println("Here are the matching tasks:");
+            for (int i = 0; i < matches.size(); i++) {
+                System.out.println((i + 1) + ". " + matches.get(i));
+            }
+        }
     }
 
-    public void showLoadingError() {
-        System.out.println("Error loading tasks from file.");
+    public void showError(String msg) {
+        System.out.println(msg);
     }
 
 }
