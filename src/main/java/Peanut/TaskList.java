@@ -17,7 +17,6 @@ public class TaskList {
         tasks.add(task);
     }
 
-
     public List<Task> getTasks() {
         return this.tasks;
     }
