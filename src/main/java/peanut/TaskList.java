@@ -1,38 +1,65 @@
 package peanut;
-
 import java.util.List;
 
+/**
+ * Represents a list of tasks users want.
+ * Provides methods to add, delete, mark, and unmark tasks.
+ */
 public class TaskList {
     private List<Task> tasks;
-
+    /**
+     * Creates a TaskList with existing list of tasks
+     *
+     * @param tasks List of task previously saved
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
-
-    public TaskList() {
-        this.tasks = tasks;
-    }
-
+    /**
+     * Adds a task to the list.
+     *
+     * @param task The task to add.
+     */
     public void add(Task task) {
         tasks.add(task);
     }
-
+    /**
+     * Returns all tasks in TaskList.
+     *
+     * @return A list containing all the tasks.
+     */
     public List<Task> getTasks() {
         return this.tasks;
     }
-
+    /**
+     * Mark task at the specified index.
+     *
+     * @param index Index of task that user wants to mark.
+     */
     public void mark(int index) {
         tasks.get(index).mark();
     }
-
+    /**
+     * Unmark task at the specified index.
+     *
+     * @param index Index of task that user wants to unmark.
+     */
     public void unmark(int index) {
         tasks.get(index).unmark();
     }
-
+    /**
+     * Returns number of tasks in the TaskList
+     *
+     * @return The number of tasks in the Tasklist
+     */
     public int size() {
         return tasks.size();
     }
-
+    /**
+     * Delete task at the specified index.
+     *
+     * @param taskNumber Index of task that user wants to delete.
+     */
     public void delete(int taskNumber) {
         tasks.remove(taskNumber);
     }

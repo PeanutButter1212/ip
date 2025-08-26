@@ -3,8 +3,22 @@ package peanut;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * The Parser class interprets user input.
+ * It is responsible for parsing command strings by users into instructions
+ * for the chatbot to execute.
+ */
 
 public class Parser {
+    /**
+     * Parses users input and determines which commands to execute
+     *
+     * @param userInput Command that user enters.
+     * @param taskList TaskList that is loaded from previously saved file
+     * @param ui UI to handle user instructions and display messages
+     * @param storage Storage to handle loading and saving of files
+     * @throws PeanutException If the input cannot be translated into a valid command
+     */
     public boolean parse(String userInput, TaskList taskList, Ui ui, Storage storage) throws PeanutException {
         userInput = userInput.trim();
 
