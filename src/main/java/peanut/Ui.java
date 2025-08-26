@@ -1,5 +1,6 @@
 package peanut;
 import java.util.Scanner;
+import java.util.List;
 
 /**
  * The Ui class handles all interactions with the user.
@@ -89,6 +90,22 @@ public class Ui {
      */
     public void showErrorMessage(String msg) {
         System.out.println(msg);
+    }
+
+    /**
+     * Displays list of tasks that matches keyword
+     *
+     * @param matches List of tasks that matches users input
+     */
+    public void showMatches(List<Task> matches) {
+        if (matches.isEmpty()) {
+            System.out.println("no results found :(");
+        } else {
+            System.out.println("Here are the matching tasks:");
+            for (int i = 0; i < matches.size(); i++) {
+                System.out.println((i + 1) + ". " + matches.get(i));
+            }
+        }
     }
 
 

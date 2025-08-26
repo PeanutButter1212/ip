@@ -2,6 +2,7 @@ package peanut;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 
 /**
  * The Parser class interprets user input.
@@ -163,9 +164,20 @@ public class Parser {
             return false;
         }
 
+        if (userInput.startsWith("find")) {
+            String[] parts = userInput.split("\\s+", 2);
+            if (parts.length < 2 || parts[1].isBlank()) {
+                throw new PeanutException("Please enter a valid word to find!! (e.g find book)");
+            }
+            List<Task> matched = taskList.match(parts[1]);
+            ui.showMatches(matched);
+            return false;
+        }
+
         throw new PeanutException("Sorry idk wat u saying bro");
 
     }
+
 
 }
 

@@ -50,5 +50,9 @@ public class Task {
         return "T | " + (isDone ? "1" : "0") + " | " + description;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
 }
 
