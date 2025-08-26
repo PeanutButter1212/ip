@@ -13,7 +13,6 @@ public class Peanut {
         this.tasks = new TaskList(storage.load());
         }
 
-
     public void run() {
         ui.welcomeMessage();
         boolean exit = false;
@@ -22,7 +21,7 @@ public class Peanut {
             try {
                 exit = parser.parse(input, tasks, ui, storage);
             } catch (PeanutException e) {
-                ui.showError(e.getMessage());
+                ui.showErrorMessage(e.getMessage());
             }
         }
     }

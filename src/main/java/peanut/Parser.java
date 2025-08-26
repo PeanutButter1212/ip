@@ -28,7 +28,7 @@ public class Parser {
         }
 
         if (userInput.equals("list")) {
-            ui.showList(taskList);
+            ui.showListMessage(taskList);
             return false;
         }
 
@@ -46,7 +46,7 @@ public class Parser {
             int taskNumber = Integer.parseInt(parts[1]) - 1;
             taskList.mark(taskNumber);
             storage.save(taskList);
-            ui.markList(taskList.getTasks().get(taskNumber));
+            ui.markListMessage(taskList.getTasks().get(taskNumber));
             return false;
 
 
@@ -66,7 +66,7 @@ public class Parser {
             int taskNumber = Integer.parseInt(parts[1]) - 1;
             taskList.unmark(taskNumber);
             storage.save(taskList);
-            ui.unmarkList(taskList.getTasks().get(taskNumber));
+            ui.unmarkListMessage(taskList.getTasks().get(taskNumber));
             return false;
 
         }
@@ -81,7 +81,7 @@ public class Parser {
             Task todoTask = new ToDo(parts[1]);
             taskList.add(todoTask);
             storage.save(taskList);
-            ui.addList(todoTask, taskList.size());
+            ui.addListMessage(todoTask, taskList.size());
             return false;
         }
         if (userInput.startsWith("deadline")) {
@@ -105,7 +105,7 @@ public class Parser {
                 Task deadlineTask = new Deadline(task, deadlineStr);
                 taskList.add(deadlineTask);
                 storage.save(taskList);
-                ui.addList(deadlineTask, taskList.size());
+                ui.addListMessage(deadlineTask, taskList.size());
                 return false;
             } catch (DateTimeParseException e) {
                 throw new PeanutException("Please enter dates in yyyy-MM-dd format (e.g. 2019-10-15)!!!");
@@ -145,7 +145,7 @@ public class Parser {
                 Task eventTask = new Event(task, deadlineStr, startDateStr);
                 taskList.add(eventTask);
                 storage.save(taskList);
-                ui.addList(eventTask, taskList.size());
+                ui.addListMessage(eventTask, taskList.size());
                 return false;
             } catch (DateTimeParseException e) {
                 throw new PeanutException("Please enter dates in yyyy-MM-dd format (e.g. 2019-10-15)!!!");
@@ -159,7 +159,7 @@ public class Parser {
             }
             taskList.delete(Integer.parseInt(parts[1]) - 1);
             storage.save(taskList);
-            ui.deleteList(taskList);
+            ui.deleteListMessage(taskList);
             return false;
         }
 
