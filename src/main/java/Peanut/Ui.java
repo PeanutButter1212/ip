@@ -1,3 +1,5 @@
+package Peanut;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -8,7 +10,7 @@ public class Ui {
     }
 
     public void welcomeMessage() {
-        System.out.println("Hello! :D I'm Peanut\nWhat can I do for you?");
+        System.out.println("Hello! :D I'm Peanut.Peanut\nWhat can I do for you?");
     }
 
     public void byeMessage() {
