@@ -1,5 +1,7 @@
 package peanut;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 /**
  * Entry point of the Peanut application.
@@ -41,7 +43,37 @@ public class Peanut {
         }
     }
 
+    /**
+     * Generates a response for the user's chat message.
+     *
+     * @param input the input that users provide to chatbot
+     */
+    public String getResponse(String input) {
+        // Since we use printout for statements we need capture them and turn to string
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream buf = new ByteArrayOutputStream();
+        PrintStream capture = new PrintStream(buf);
+        System.setOut(capture);
+
+        String reply;
+        try {
+            boolean exit = parser.parse(input, tasks, ui, storage);
+
+            reply = buf.toString().trim();
+        } catch (PeanutException e) {
+            reply = e.getMessage();
+        } finally {
+            System.out.flush();
+            System.setOut(originalOut);
+        }
+
+        return reply;
+    }
+
+
+
     public static void main(String[] args) {
+
         new Peanut("data/peanut.txt").run();
     }
 }

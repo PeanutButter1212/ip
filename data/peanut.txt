@@ -1,5 +1,2 @@
 T | 1 | poo
 E | 1 | lol | 2019-10-26 | 2019-10-27
-T | 0 | hehehhaha
-T | 0 | lolol
-T | 0 | hi
