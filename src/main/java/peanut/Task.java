@@ -22,16 +22,21 @@ public class Task {
      * @return a string representing status of isDone
      */
     public String getStatusIcon() {
+
         return (isDone ? "X" : " ");
     }
     /**
      * Sets isdone to true when mark task
      */
-    public void mark() {this.isDone = true; }
+    public void mark() {
+        this.isDone = true;
+    }
     /**
      * Sets isdone to false when unmark task
      */
-    public void unmark() {this.isDone = false ; }
+    public void unmark() {
+        this.isDone = false;
+    }
     /**
      * Returns format of the task to be displayed by bot
      *
@@ -39,6 +44,7 @@ public class Task {
      */
     @Override
     public String toString() {
+
         return "[" + getStatusIcon() + "] " + description;
     }
     /**
@@ -47,10 +53,12 @@ public class Task {
      * @return String format to be written into file
      */
     public String toFileFormat() {
+
         return "T | " + (isDone ? "1" : "0") + " | " + description;
     }
 
     public String getDescription() {
+
         return this.description;
     }
 

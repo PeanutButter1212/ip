@@ -1,21 +1,28 @@
-import peanut.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import peanut.Deadline;
+import peanut.Event;
+import peanut.Storage;
+import peanut.Task;
+import peanut.TaskList;
+import peanut.ToDo;
 
 
 public class StorageTest {
 
     @TempDir
-    Path tempDir;//temp directory to use for testing so it dosent mess up actual
+    Path tempDir; //temp directory to use for testing so it dosent mess up actual
 
     @Test
-    public void saveAndLoad_Success() {
+    public void saveAndLoad_success() {
         File testFile = tempDir.resolve("test.txt").toFile();
         Storage storage = new Storage(testFile.getAbsolutePath());
 

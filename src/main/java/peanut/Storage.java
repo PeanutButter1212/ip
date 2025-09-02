@@ -2,11 +2,11 @@ package peanut;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * The Storage class handles file saving and loading
@@ -20,7 +20,7 @@ public class Storage {
      *
      * @param filePath path to the file for saving/loading
      */
-    public Storage (String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
     /**
@@ -69,8 +69,7 @@ public class Storage {
             folder.mkdirs();
         }
 
-        try ( FileWriter fw = new FileWriter(this.filePath)) {
-
+        try (FileWriter fw = new FileWriter(this.filePath)) {
             for (Task t : taskList.getTasks()) {
                 fw.write(t.toFileFormat());
                 fw.write(System.lineSeparator());
@@ -93,15 +92,17 @@ public class Storage {
 
         Task task = null;
         switch (type) {
-            case "T":
-                task = new ToDo(desc);
-                break;
-            case "D":
-                task = new Deadline(desc, parts[3]);
-                break;
-            case "E":
-                task = new Event(desc, parts[4], parts[3]);
-                break;
+        case "T":
+            task = new ToDo(desc);
+            break;
+        case "D":
+            task = new Deadline(desc, parts[3]);
+            break;
+        case "E":
+            task = new Event(desc, parts[4], parts[3]);
+            break;
+        default:
+            return null;
         }
 
         if (task != null && isDone) {

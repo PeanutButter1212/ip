@@ -89,13 +89,15 @@ public class Parser {
             String[] parts = userInput.split("\\s+", 2);
 
             if (parts.length < 2 || parts[1].isBlank()) {
-                throw new PeanutException("The description/time of deadline cannot be empty!! (e.g deadline read book /by 2019-10-15)");
+                throw new PeanutException("The description/time of deadline cannot be empty!! "
+                        + "(e.g deadline read book /by 2019-10-15)");
             }
 
             String[] sep = parts[1].split("/by", 2);
 
             if (sep.length < 2 || sep[0].isBlank() || sep[1].isBlank()) {
-                throw new PeanutException("The description/time of deadline cannot be empty!! (e.g deadline read book /by 2019-10-15)");
+                throw new PeanutException("The description/time of deadline cannot be empty!! "
+                        + "(e.g deadline read book /by 2019-10-15)");
             }
 
             String task = sep[0];
@@ -117,23 +119,23 @@ public class Parser {
             String[] parts = userInput.split("\\s+", 2);
 
             if (parts.length < 2 || parts[1].isBlank()) {
-                throw new PeanutException("The description/time of start and deadline " +
-                        "cannot be empty!! (e.g event project meeting /from 2019-10-15 /to 2019-10-16)");
+                throw new PeanutException("The description/time of start and deadline "
+                        + "cannot be empty!! (e.g event project meeting /from 2019-10-15 /to 2019-10-16)");
             }
 
             String[] sep = parts[1].split("/from", 2);
 
             if (sep.length < 2) {
-                throw new PeanutException("The description/time of start and deadline " +
-                        "cannot be empty!! (e.g event project meeting /from 2019-10-15 /to 2019-10-16)");
+                throw new PeanutException("The description/time of start and deadline "
+                        + "cannot be empty!! (e.g event project meeting /from 2019-10-15 /to 2019-10-16)");
             }
 
             String[] sep2 = sep[1].split("/to", 2);
 
             if (sep.length < 2 || sep2.length < 2
                     || sep[0].isBlank() || sep2[0].isBlank() || sep2[1].isBlank()) {
-                throw new PeanutException("The description/time of start and deadline " +
-                        "cannot be empty!! (e.g event project meeting /from 2019-10-15 /to 2019-10-16)");
+                throw new PeanutException("The description/time of start and deadline "
+                        + "cannot be empty!! (e.g event project meeting /from 2019-10-15 /to 2019-10-16)");
             }
             String task = sep[0];
             String deadlineStr = sep2[1].trim();

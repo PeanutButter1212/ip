@@ -1,6 +1,8 @@
 package peanut;
-import java.util.Scanner;
+
 import java.util.List;
+import java.util.Scanner;
+
 
 /**
  * The Ui class handles all interactions with the user.
@@ -19,12 +21,14 @@ public class Ui {
      * Prints welcome message when bot starts up.
      */
     public void welcomeMessage() {
+
         System.out.println("Hello! :D I'm Peanut.\nWhat can I do for you?");
     }
     /**
      * Prints goodbye message when user exits chatbot.
      */
     public void byeMessage() {
+
         System.out.println("Bye. Hope to see you again soon!");
     }
     /**
@@ -33,6 +37,7 @@ public class Ui {
      * @return Command line entered by user.
      */
     public String readCommand() {
+
         return sc.nextLine();
     }
     /**
@@ -42,7 +47,7 @@ public class Ui {
      * @param size Total number of tasks in the list.
      *
      */
-    public void addListMessage (Task task, int size) {
+    public void addListMessage(Task task, int size) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
         System.out.println("Now you have " + size + " tasks in the list.");
@@ -81,7 +86,7 @@ public class Ui {
      *
      * @param taskList TaskList containing task that user wants to delete.
      */
-    public void deleteListMessage(TaskList taskList){
+    public void deleteListMessage(TaskList taskList) {
         System.out.println("Noted. I've removed this task:");
         System.out.println("Now you have " + taskList.size() + " tasks in the list.");
     }
