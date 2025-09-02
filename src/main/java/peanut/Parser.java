@@ -160,9 +160,9 @@ public class Parser {
             if (parts.length < 2 || parts[1].isBlank() || Integer.parseInt(parts[1]) > taskList.size()) {
                 throw new PeanutException("Please enter a valid number!!");
             }
+            ui.deleteListMessage(taskList,Integer.parseInt(parts[1]) - 1);
             taskList.delete(Integer.parseInt(parts[1]) - 1);
             storage.save(taskList);
-            ui.deleteListMessage(taskList);
             return false;
         }
 

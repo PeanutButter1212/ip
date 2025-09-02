@@ -15,6 +15,7 @@ public class Ui {
      * Creates a new Ui object and initialises scanner to read user input.
      */
     public Ui() {
+
         sc = new Scanner(System.in);
     }
     /**
@@ -70,6 +71,7 @@ public class Ui {
      */
     public void markListMessage(Task task) {
         System.out.println("Nice! I've marked this task as done:");
+
         System.out.println(task);
     }
     /**
@@ -86,9 +88,10 @@ public class Ui {
      *
      * @param taskList TaskList containing task that user wants to delete.
      */
-    public void deleteListMessage(TaskList taskList) {
+    public void deleteListMessage(TaskList taskList, int taskNumber) {
         System.out.println("Noted. I've removed this task:");
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println(taskList.getTasks().get(taskNumber));
+        System.out.println("Now you have " + (taskList.size() - 1) + " tasks in the list.");
     }
     /**
      * Shows relevant error message
