@@ -1,8 +1,8 @@
 package peanut;
 
 public class PeanutException extends Exception {
-    public PeanutException(String a) {
+    public PeanutException(String message) {
 
-        super(a);
+        super(message);
     }
 }

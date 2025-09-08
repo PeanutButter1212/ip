@@ -123,23 +123,23 @@ public class Parser {
                         + "cannot be empty!! (e.g event project meeting /from 2019-10-15 /to 2019-10-16)");
             }
 
-            String[] sep = parts[1].split("/from", 2);
+            String[] descriptionAndTime = parts[1].split("/from", 2);
 
-            if (sep.length < 2) {
+            if (descriptionAndTime.length < 2) {
                 throw new PeanutException("The description/time of start and deadline "
                         + "cannot be empty!! (e.g event project meeting /from 2019-10-15 /to 2019-10-16)");
             }
 
-            String[] sep2 = sep[1].split("/to", 2);
+            String[] startAndEnd = descriptionAndTime[1].split("/to", 2);
 
-            if (sep.length < 2 || sep2.length < 2
-                    || sep[0].isBlank() || sep2[0].isBlank() || sep2[1].isBlank()) {
+            if (descriptionAndTime.length < 2 || startAndEnd.length < 2
+                    || descriptionAndTime[0].isBlank() || startAndEnd[0].isBlank() || startAndEnd[1].isBlank()) {
                 throw new PeanutException("The description/time of start and deadline "
                         + "cannot be empty!! (e.g event project meeting /from 2019-10-15 /to 2019-10-16)");
             }
-            String task = sep[0];
-            String deadlineStr = sep2[1].trim();
-            String startDateStr = sep2[0].trim();
+            String task = descriptionAndTime[0];
+            String deadlineStr = startAndEnd[1].trim();
+            String startDateStr = startAndEnd[0].trim();
 
             try {
                 LocalDate startDate = LocalDate.parse(startDateStr);

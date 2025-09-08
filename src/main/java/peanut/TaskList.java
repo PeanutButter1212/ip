@@ -51,7 +51,7 @@ public class TaskList {
     /**
      * Returns number of tasks in the TaskList
      *
-     * @return The number of tasks in the Tasklist
+     * @return The number of tasks in the TaskList
      */
     public int size() {
         return tasks.size();
@@ -59,10 +59,10 @@ public class TaskList {
     /**
      * Delete task at the specified index.
      *
-     * @param taskNumber Index of task that user wants to delete.
+     * @param index Index of task that user wants to delete.
      */
-    public void delete(int taskNumber) {
-        tasks.remove(taskNumber);
+    public void delete(int index) {
+        tasks.remove(index);
     }
 
     /**
