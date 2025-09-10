@@ -13,7 +13,6 @@ public class Peanut {
     private Ui ui;
     private Parser parser;
 
-
     /**
      * Constructs the Peanut application with the given file path.
      *
@@ -58,7 +57,6 @@ public class Peanut {
         String reply;
         try {
             boolean exit = parser.parse(input, tasks, ui, storage);
-
             reply = buf.toString().trim();
         } catch (PeanutException e) {
             reply = e.getMessage();
@@ -69,7 +67,6 @@ public class Peanut {
 
         return reply;
     }
-
 
 
     public static void main(String[] args) {

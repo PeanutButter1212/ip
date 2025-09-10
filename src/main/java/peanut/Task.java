@@ -58,8 +58,11 @@ public class Task {
     }
 
     public String getDescription() {
-
         return this.description;
+    }
+
+    public boolean getStatus() {
+        return this.isDone;
     }
 
 }
