@@ -116,6 +116,10 @@ public class Ui {
         }
     }
 
+    public void showArchiveMessage() {
+        System.out.println("TaskList successfully archived, TaskList has been cleared!!");
+    }
+
 
 
 }

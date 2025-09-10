@@ -81,6 +81,11 @@ public class TaskList {
         return matches;
     }
 
+    public void clear() {
+        this.tasks.clear();
+    }
+
+
 }
 
 
