@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -15,6 +19,7 @@ import java.util.Scanner;
  */
 public class Storage {
     private String filePath;
+
     /**
      * Creates storage object with given filepath
      *
@@ -23,6 +28,7 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
     }
+
     /**
      * Loads task from file into a list of tasks
      * If file/folder does not exist, empty list is returned
@@ -78,6 +84,33 @@ public class Storage {
             System.err.println("Error saving: " + e.getMessage());
         }
     }
+
+    /**
+     * Archive task from current list into file
+     * Clears current list
+     *
+     * @param taskList List of tasks that needs to be archived into file
+     */
+
+    public void archive(TaskList taskList) {
+        Path dataDir = Paths.get("data");
+        String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
+        Path out = dataDir.resolve("archive-" + date + ".txt");
+
+        try (FileWriter fw = new FileWriter(out.toFile())) {
+            for (Task t : taskList.getTasks()) {
+                fw.write(t.toFileFormat());
+                fw.write(System.lineSeparator());
+            }
+        } catch (IOException e) {
+            System.err.println("Error saving: " + e.getMessage());
+        }
+        taskList.clear();
+        save(taskList);
+    }
+
+
+
 
     private Task createTaskHelper(String taskDetails) {
 

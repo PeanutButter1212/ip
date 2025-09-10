@@ -195,6 +195,12 @@ public class Parser {
             return false;
         }
 
+        case "archive": {
+            storage.archive(taskList);
+            ui.showArchiveMessage();
+            return false;
+        }
+
         default:
             throw new PeanutException("Sorry idk wat u saying bro");
         }
