@@ -21,6 +21,11 @@ public class Parser {
      * @throws PeanutException If the input cannot be translated into a valid command
      */
     public boolean parse(String userInput, TaskList taskList, Ui ui, Storage storage) throws PeanutException {
+        assert taskList != null: "TaskList must not be null";
+        assert ui != null: "Ui must not be null";
+        assert storage != null: "storage must not be null";
+        assert userInput != null: "userInput must not be null";
+
         userInput = userInput.trim();
         String[] parts = userInput.split("\\s+", 2);
         String command = parts[0];
@@ -47,9 +52,12 @@ public class Parser {
             }
 
             int taskNumber = Integer.parseInt(parts[1]) - 1;
+            int sizeBefore = taskList.size();
             taskList.mark(taskNumber);
             storage.save(taskList);
             ui.markListMessage(taskList.getTasks().get(taskNumber));
+            assert taskList.size() == sizeBefore : "TaskList size should stay the same";
+            assert taskList.getTasks().get(taskNumber).getStatus() : "Task must be marked done";
             return false;
         }
 
@@ -61,10 +69,14 @@ public class Parser {
             if (Integer.parseInt(parts[1]) > taskList.size()) {
                 throw new PeanutException("Please provide a valid task number!");
             }
+
             int unmarkTaskNumber = Integer.parseInt(parts[1]) - 1;
             taskList.unmark(unmarkTaskNumber);
             storage.save(taskList);
             ui.unmarkListMessage(taskList.getTasks().get(unmarkTaskNumber));
+            int sizeBefore = taskList.size();
+            assert taskList.size() == sizeBefore : "TaskList size should stay the same";
+            assert taskList.getTasks().get(taskNumber).getStatus() : "Task must be unmarked";
             return false;
         }
 
@@ -74,9 +86,12 @@ public class Parser {
             }
 
             Task todoTask = new ToDo(parts[1]);
+            int sizeBefore = taskList.size();
             taskList.add(todoTask);
             storage.save(taskList);
             ui.addListMessage(todoTask, taskList.size());
+            assert taskList.size() == sizeBefore + 1 : "TaskList size should increase by 1";
+            assert taskList.getTasks().get(taskList.size() - 1) == todoTask : "New task should added to bottom";
             return false;
         }
 
@@ -97,15 +112,19 @@ public class Parser {
             String endDateText = descriptionBySplit[1].trim();
 
             try {
-                LocalDate deadline = LocalDate.parse(endDateText);
-                Task deadlineTask = new Deadline(description, endDateText);
-                taskList.add(deadlineTask);
-                storage.save(taskList);
-                ui.addListMessage(deadlineTask, taskList.size());
-                return false;
             } catch (DateTimeParseException e) {
                 throw new PeanutException("Please enter dates in yyyy-MM-dd format (e.g. 2019-10-15)!!!");
             }
+
+           LocalDate deadline = LocalDate.parse(endDateText);
+            Task deadlineTask = new Deadline(description, endDateText);
+            taskList.add(deadlineTask);
+            storage.save(taskList);
+            ui.addListMessage(deadlineTask, taskList.size());
+            int sizeBefore = taskList.size();
+            assert taskList.size() == sizeBefore + 1 : "TaskList size should increase by 1";
+            assert taskList.getTasks().get(taskList.size() - 1) == deadlineTask : "New task should added to bottom";
+            return false;
         }
 
 
@@ -129,6 +148,7 @@ public class Parser {
                 throw new PeanutException("The description/time of start and deadline "
                         + "cannot be empty!! (e.g event project meeting /from 2019-10-15 /to 2019-10-16)");
             }
+          
             String description = descriptionFromSplit[0];
             String endDateText = fromToSplit[1].trim();
             String startDateText = fromToSplit[0].trim();
@@ -136,15 +156,17 @@ public class Parser {
             try {
                 LocalDate startDate = LocalDate.parse(startDateText);
                 LocalDate deadline = LocalDate.parse(endDateText);
-
-                Task eventTask = new Event(description, endDateText, startDateText);
-                taskList.add(eventTask);
-                storage.save(taskList);
-                ui.addListMessage(eventTask, taskList.size());
-                return false;
             } catch (DateTimeParseException e) {
                 throw new PeanutException("Please enter dates in yyyy-MM-dd format (e.g. 2019-10-15)!!!");
             }
+            Task eventTask = new Event(description, endDateText, startDateText);
+            taskList.add(eventTask);
+            storage.save(taskList);
+            ui.addListMessage(eventTask, taskList.size());
+            assert taskList.size() == sizeBefore + 1 : "TaskList size should increase by 1";
+            assert taskList.getTasks().get(taskList.size() - 1) == eventTask : "New task should added to bottom";
+
+            return false;
         }
 
 
@@ -152,9 +174,11 @@ public class Parser {
             if (parts.length < 2 || parts[1].isBlank() || Integer.parseInt(parts[1]) > taskList.size()) {
                 throw new PeanutException("Please enter a valid number!!");
             }
-            ui.deleteListMessage(taskList, Integer.parseInt(parts[1]) - 1);
+            int sizeBefore = taskList.size();
+            ui.deleteListMessage(taskList,Integer.parseInt(parts[1]) - 1);
             taskList.delete(Integer.parseInt(parts[1]) - 1);
             storage.save(taskList);
+            assert taskList.size() == sizeBefore - 1 : "Delete must reduce size by 1";
             return false;
         }
 

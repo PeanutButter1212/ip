@@ -16,6 +16,7 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    jvmArgs '-ea'
 
     testLogging {
         events "passed", "skipped", "failed"
@@ -61,6 +62,10 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+}
+
+tasks.withType(JavaExec).configureEach {
+    jvmArgs '-ea'
 }
 
 
