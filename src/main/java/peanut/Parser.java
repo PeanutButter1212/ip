@@ -70,13 +70,18 @@ public class Parser {
                 throw new PeanutException("Please provide a valid task number!");
             }
 
+
             int unmarkTaskNumber = Integer.parseInt(parts[1]) - 1;
+
+            if (taskList.getTasks().get(unmarkTaskNumber).getStatus() == false) {
+                throw new PeanutException("Task already unmarked!!");
+            }
+            int sizeBefore = taskList.size();
             taskList.unmark(unmarkTaskNumber);
             storage.save(taskList);
             ui.unmarkListMessage(taskList.getTasks().get(unmarkTaskNumber));
-            int sizeBefore = taskList.size();
             assert taskList.size() == sizeBefore : "TaskList size should stay the same";
-            assert taskList.getTasks().get(taskNumber).getStatus() : "Task must be unmarked";
+            assert taskList.getTasks().get(unmarkTaskNumber).getStatus() : "Task must be unmarked";
             return false;
         }
 
@@ -112,16 +117,15 @@ public class Parser {
             String endDateText = descriptionBySplit[1].trim();
 
             try {
+                LocalDate.parse(endDateText);
             } catch (DateTimeParseException e) {
                 throw new PeanutException("Please enter dates in yyyy-MM-dd format (e.g. 2019-10-15)!!!");
             }
-
-           LocalDate deadline = LocalDate.parse(endDateText);
+            int sizeBefore = taskList.size();
             Task deadlineTask = new Deadline(description, endDateText);
             taskList.add(deadlineTask);
             storage.save(taskList);
             ui.addListMessage(deadlineTask, taskList.size());
-            int sizeBefore = taskList.size();
             assert taskList.size() == sizeBefore + 1 : "TaskList size should increase by 1";
             assert taskList.getTasks().get(taskList.size() - 1) == deadlineTask : "New task should added to bottom";
             return false;
@@ -159,13 +163,13 @@ public class Parser {
             } catch (DateTimeParseException e) {
                 throw new PeanutException("Please enter dates in yyyy-MM-dd format (e.g. 2019-10-15)!!!");
             }
+            int sizeBefore = taskList.size();
             Task eventTask = new Event(description, endDateText, startDateText);
             taskList.add(eventTask);
             storage.save(taskList);
             ui.addListMessage(eventTask, taskList.size());
             assert taskList.size() == sizeBefore + 1 : "TaskList size should increase by 1";
             assert taskList.getTasks().get(taskList.size() - 1) == eventTask : "New task should added to bottom";
-
             return false;
         }
 
