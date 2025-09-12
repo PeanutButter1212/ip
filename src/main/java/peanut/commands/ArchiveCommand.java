@@ -1,9 +1,9 @@
 package peanut.commands;
 
-import peanut.PeanutException;
-import peanut.Storage;
-import peanut.TaskList;
-import peanut.Ui;
+import peanut.tasks.PeanutException;
+import peanut.storage.Storage;
+import peanut.tasks.TaskList;
+import peanut.ui.Ui;
 
 public class ArchiveCommand extends Command {
     private final Storage storage;

@@ -1,4 +1,4 @@
-package peanut;
+package peanut.tasks;
 
 /**
  * Represents a task that user inputs

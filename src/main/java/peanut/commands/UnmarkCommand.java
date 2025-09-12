@@ -1,8 +1,8 @@
 package peanut.commands;
 
-import peanut.PeanutException;
-import peanut.TaskList;
-import peanut.Ui;
+import peanut.tasks.PeanutException;
+import peanut.tasks.TaskList;
+import peanut.ui.Ui;
 
 public class UnmarkCommand extends Command{
     private final String args;

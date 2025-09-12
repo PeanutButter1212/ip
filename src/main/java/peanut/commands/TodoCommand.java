@@ -1,10 +1,10 @@
 package peanut.commands;
 
-import peanut.PeanutException;
-import peanut.Task;
-import peanut.TaskList;
-import peanut.ToDo;
-import peanut.Ui;
+import peanut.tasks.PeanutException;
+import peanut.tasks.Task;
+import peanut.tasks.TaskList;
+import peanut.tasks.ToDo;
+import peanut.ui.Ui;
 
 public class TodoCommand extends Command{
     private final String args;

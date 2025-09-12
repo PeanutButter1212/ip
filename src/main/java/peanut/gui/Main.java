@@ -1,4 +1,4 @@
-package peanut;
+package peanut.gui;
 
 import java.io.IOException;
 

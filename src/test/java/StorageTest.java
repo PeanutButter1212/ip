@@ -8,12 +8,12 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import peanut.Deadline;
-import peanut.Event;
-import peanut.Storage;
-import peanut.Task;
-import peanut.TaskList;
-import peanut.ToDo;
+import peanut.tasks.Deadline;
+import peanut.tasks.Event;
+import peanut.storage.Storage;
+import peanut.tasks.Task;
+import peanut.tasks.TaskList;
+import peanut.tasks.ToDo;
 
 
 public class StorageTest {

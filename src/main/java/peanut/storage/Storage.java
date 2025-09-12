@@ -1,4 +1,10 @@
-package peanut;
+package peanut.storage;
+
+import peanut.tasks.Deadline;
+import peanut.tasks.Event;
+import peanut.tasks.Task;
+import peanut.tasks.TaskList;
+import peanut.tasks.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

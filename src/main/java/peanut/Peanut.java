@@ -1,7 +1,11 @@
 package peanut;
 
 import peanut.commands.Command;
-import peanut.commands.WelcomeCommand;
+import peanut.parser.Parser;
+import peanut.storage.Storage;
+import peanut.tasks.PeanutException;
+import peanut.tasks.TaskList;
+import peanut.ui.Ui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

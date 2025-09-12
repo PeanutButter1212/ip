@@ -1,4 +1,7 @@
-package peanut;
+package peanut.ui;
+
+import peanut.tasks.Task;
+import peanut.tasks.TaskList;
 
 import java.util.List;
 import java.util.Scanner;

@@ -1,5 +1,6 @@
-package peanut;
+package peanut.parser;
 
+import peanut.ui.Ui;
 import peanut.commands.ArchiveCommand;
 import peanut.commands.ByeCommand;
 import peanut.commands.Command;
@@ -12,6 +13,9 @@ import peanut.commands.MarkCommand;
 import peanut.commands.TodoCommand;
 import peanut.commands.UnmarkCommand;
 import peanut.commands.WelcomeCommand;
+import peanut.storage.Storage;
+import peanut.tasks.PeanutException;
+import peanut.tasks.TaskList;
 
 /**
  * The Parser class interprets user input.

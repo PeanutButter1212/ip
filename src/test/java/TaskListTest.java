@@ -6,9 +6,9 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import peanut.Task;
-import peanut.TaskList;
-import peanut.ToDo;
+import peanut.tasks.Task;
+import peanut.tasks.TaskList;
+import peanut.tasks.ToDo;
 
 
 
