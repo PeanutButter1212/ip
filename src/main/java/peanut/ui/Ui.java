@@ -1,10 +1,11 @@
 package peanut.ui;
 
+import java.util.List;
+import java.util.Scanner;
+
 import peanut.tasks.Task;
 import peanut.tasks.TaskList;
 
-import java.util.List;
-import java.util.Scanner;
 
 
 /**

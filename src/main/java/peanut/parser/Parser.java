@@ -1,6 +1,5 @@
 package peanut.parser;
 
-import peanut.ui.Ui;
 import peanut.commands.ArchiveCommand;
 import peanut.commands.ByeCommand;
 import peanut.commands.Command;
@@ -16,6 +15,7 @@ import peanut.commands.WelcomeCommand;
 import peanut.storage.Storage;
 import peanut.tasks.PeanutException;
 import peanut.tasks.TaskList;
+import peanut.ui.Ui;
 
 /**
  * The Parser class interprets user input.
@@ -34,10 +34,10 @@ public class Parser {
      * @throws PeanutException If the input cannot be translated into a valid command
      */
     public Command parse(String userInput, TaskList taskList, Ui ui, Storage storage) throws PeanutException {
-        assert taskList != null: "TaskList must not be null";
-        assert ui != null: "Ui must not be null";
-        assert storage != null: "storage must not be null";
-        assert userInput != null: "userInput must not be null";
+        assert taskList != null : "TaskList must not be null";
+        assert ui != null : "Ui must not be null";
+        assert storage != null : "storage must not be null";
+        assert userInput != null : "userInput must not be null";
 
         String[] parts = userInput.split(" ", 2);
         String command = parts[0].toLowerCase();
@@ -61,7 +61,7 @@ public class Parser {
         }
 
         case "unmark": {
-           return new UnmarkCommand(args);
+            return new UnmarkCommand(args);
         }
 
         case "todo": {

@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
             throw new PeanutException("Please enter a valid number!!");
         }
         int sizeBefore = taskList.size();
-        ui.deleteListMessage(taskList,Integer.parseInt(args) - 1);
+        ui.deleteListMessage(taskList, Integer.parseInt(args) - 1);
         taskList.delete(Integer.parseInt(args) - 1);
         assert taskList.size() == sizeBefore - 1 : "Delete must reduce size by 1";
         return false;

@@ -1,13 +1,14 @@
 package peanut.commands;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import peanut.tasks.Deadline;
 import peanut.tasks.PeanutException;
 import peanut.tasks.Task;
 import peanut.tasks.TaskList;
 import peanut.ui.Ui;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 public class DeadlineCommand extends Command {
     private final String args;
@@ -25,8 +26,8 @@ public class DeadlineCommand extends Command {
 
         String[] descriptionBySplit = args.split("/by", 2);
 
-        if (descriptionBySplit.length < 2 || descriptionBySplit[0].isBlank() ||
-                descriptionBySplit[1].isBlank()) {
+        if (descriptionBySplit.length < 2 || descriptionBySplit[0].isBlank()
+                || descriptionBySplit[1].isBlank()) {
             throw new PeanutException("The description/time of deadline cannot be empty!! "
                     + "(e.g deadline read book /by 2019-10-15)");
         }

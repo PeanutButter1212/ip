@@ -1,5 +1,8 @@
 package peanut;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import peanut.commands.Command;
 import peanut.parser.Parser;
 import peanut.storage.Storage;
@@ -7,8 +10,6 @@ import peanut.tasks.PeanutException;
 import peanut.tasks.TaskList;
 import peanut.ui.Ui;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 /**
  * Entry point of the Peanut application.
@@ -58,7 +59,7 @@ public class Peanut {
             String input = ui.readCommand();
             try {
                 Command command = parser.parse(input, taskList, ui, storage);
-                exit = command.run(taskList,ui);
+                exit = command.run(taskList, ui);
                 storage.save(taskList);
             } catch (PeanutException e) {
                 ui.showErrorMessage(e.getMessage());
@@ -81,7 +82,7 @@ public class Peanut {
         String reply;
         try {
             Command command = parser.parse(input, taskList, ui, storage);
-            boolean exit = command.run(taskList,ui);
+            boolean exit = command.run(taskList, ui);
             storage.save(taskList);
 
             reply = buf.toString().trim();

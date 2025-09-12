@@ -1,11 +1,5 @@
 package peanut.storage;
 
-import peanut.tasks.Deadline;
-import peanut.tasks.Event;
-import peanut.tasks.Task;
-import peanut.tasks.TaskList;
-import peanut.tasks.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,6 +11,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import peanut.tasks.Deadline;
+import peanut.tasks.Event;
+import peanut.tasks.Task;
+import peanut.tasks.TaskList;
+import peanut.tasks.ToDo;
+
 
 /**
  * The Storage class handles file saving and loading

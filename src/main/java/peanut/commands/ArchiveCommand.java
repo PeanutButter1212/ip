@@ -1,7 +1,7 @@
 package peanut.commands;
 
-import peanut.tasks.PeanutException;
 import peanut.storage.Storage;
+import peanut.tasks.PeanutException;
 import peanut.tasks.TaskList;
 import peanut.ui.Ui;
 

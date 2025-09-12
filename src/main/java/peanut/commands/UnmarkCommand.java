@@ -4,7 +4,7 @@ import peanut.tasks.PeanutException;
 import peanut.tasks.TaskList;
 import peanut.ui.Ui;
 
-public class UnmarkCommand extends Command{
+public class UnmarkCommand extends Command {
     private final String args;
 
     public UnmarkCommand(String args) {

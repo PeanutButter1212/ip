@@ -30,7 +30,7 @@ test {
 }
 
 application {
-    mainClass.set("peanut.Launcher")
+    mainClass.set("peanut.gui.Launcher")
 }
 
 shadowJar {

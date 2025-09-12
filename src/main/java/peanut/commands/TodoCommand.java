@@ -6,7 +6,7 @@ import peanut.tasks.TaskList;
 import peanut.tasks.ToDo;
 import peanut.ui.Ui;
 
-public class TodoCommand extends Command{
+public class TodoCommand extends Command {
     private final String args;
 
     public TodoCommand(String args) {
