@@ -1,5 +1,8 @@
 package peanut;
 
+import peanut.commands.Command;
+import peanut.commands.WelcomeCommand;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
@@ -9,9 +12,10 @@ import java.io.PrintStream;
 
 public class Peanut {
     private Storage storage;
-    private TaskList tasks;
+    private TaskList taskList;
     private Ui ui;
     private Parser parser;
+    private boolean hasWelcomed;
 
     /**
      * Constructs the Peanut application with the given file path.
@@ -23,19 +27,35 @@ public class Peanut {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.parser = new Parser();
-        this.tasks = new TaskList(storage.load());
+        this.taskList = new TaskList(storage.load());
+    }
+
+    /**
+     * Runs the welcome command to show welcome message
+     */
+    private void ensureWelcomed() throws PeanutException {
+        if (!hasWelcomed) {
+            ui.welcomeMessage();
+            hasWelcomed = true;
+        }
     }
 
     /**
      * Runs the application event loop until the user exits.
      */
     public void run() {
-        ui.welcomeMessage();
+        try {
+            ensureWelcomed();
+        } catch (PeanutException e) {
+            ui.showErrorMessage(e.getMessage());
+        }
         boolean exit = false;
         while (!exit) {
             String input = ui.readCommand();
             try {
-                exit = parser.parse(input, tasks, ui, storage);
+                Command command = parser.parse(input, taskList, ui, storage);
+                exit = command.run(taskList,ui);
+                storage.save(taskList);
             } catch (PeanutException e) {
                 ui.showErrorMessage(e.getMessage());
             }
@@ -56,7 +76,10 @@ public class Peanut {
 
         String reply;
         try {
-            boolean exit = parser.parse(input, tasks, ui, storage);
+            Command command = parser.parse(input, taskList, ui, storage);
+            boolean exit = command.run(taskList,ui);
+            storage.save(taskList);
+
             reply = buf.toString().trim();
         } catch (PeanutException e) {
             reply = e.getMessage();
@@ -70,8 +93,9 @@ public class Peanut {
 
 
     public static void main(String[] args) {
-
         new Peanut("data/peanut.txt").run();
+
+
     }
 }
 
