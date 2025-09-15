@@ -6,8 +6,7 @@ import peanut.ui.Ui;
 
 public class WelcomeCommand extends Command {
     @Override
-    public boolean run(TaskList taskList, Ui ui) throws PeanutException {
-        ui.welcomeMessage();
-        return false;
+    public String run(TaskList taskList, Ui ui) throws PeanutException {
+        return ui.welcomeMessage();
     }
 }

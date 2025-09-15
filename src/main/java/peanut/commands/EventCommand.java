@@ -18,7 +18,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public boolean run(TaskList taskList, Ui ui) throws PeanutException {
+    public String run(TaskList taskList, Ui ui) throws PeanutException {
         if (args.isBlank()) {
             throw new PeanutException("The description/time of start and deadline "
                     + "cannot be empty!! (e.g event project meeting /from 2019-10-15 /to 2019-10-16)");
@@ -52,9 +52,8 @@ public class EventCommand extends Command {
         int sizeBefore = taskList.size();
         Task eventTask = new Event(description, endDateText, startDateText);
         taskList.add(eventTask);
-        ui.addListMessage(eventTask, taskList.size());
         assert taskList.size() == sizeBefore + 1 : "TaskList size should increase by 1";
         assert taskList.getTasks().get(taskList.size() - 1) == eventTask : "New task should added to bottom";
-        return false;
+        return ui.addListMessage(eventTask, taskList.size());
     }
 }

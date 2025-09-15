@@ -13,9 +13,8 @@ public class ArchiveCommand extends Command {
     }
 
     @Override
-    public boolean run(TaskList taskList, Ui ui) throws PeanutException {
-        ui.showArchiveMessage();
+    public String run(TaskList taskList, Ui ui) throws PeanutException {
         storage.archive(taskList);
-        return false;
+        return ui.showArchiveMessage();
     }
 }

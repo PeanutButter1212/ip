@@ -23,18 +23,18 @@ public class Ui {
         sc = new Scanner(System.in);
     }
     /**
-     * Prints welcome message when bot starts up.
+     * @return  welcome message when bot starts up.
      */
-    public void welcomeMessage() {
+    public String welcomeMessage() {
 
-        System.out.println("Hello! :D I'm Peanut.\nWhat can I do for you?");
+        return "Hello! :D I'm Peanut.\nWhat can I do for you?";
     }
     /**
      * Prints goodbye message when user exits chatbot.
      */
-    public void byeMessage() {
+    public String byeMessage() {
 
-        System.out.println("Bye. Hope to see you again soon!");
+        return "Bye. Hope to see you again soon!";
     }
     /**
      * Reads commands entered by user.
@@ -42,7 +42,6 @@ public class Ui {
      * @return Command line entered by user.
      */
     public String readCommand() {
-
         return sc.nextLine();
     }
     /**
@@ -52,56 +51,71 @@ public class Ui {
      * @param size Total number of tasks in the list.
      *
      */
-    public void addListMessage(Task task, int size) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task);
-        System.out.println("Now you have " + size + " tasks in the list.");
+    public String addListMessage(Task task, int size) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Got it. I've added this task:\n");
+        sb.append(task).append("\n");
+        sb.append("Now you have ").append(size).append(size == 1 ? " task" : " tasks").append(" in the list.");
+        return sb.toString();
     }
     /**
      * Shows entire TaskList in order.
      *
      * @param tasks The current TaskList.
      */
-    public void showListMessage(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.getTasks().get(i));
+    public String showListMessage(TaskList tasks) {
+        if (tasks.size() == 0) {
+            return "Your list is empty.";
         }
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append(i + 1).append(". ").append(tasks.getTasks().get(i)).append("\n");
+        }
+        return sb.toString().trim();
     }
     /**
      * Shows message confirming task has been marked.
      *
      * @param task Task that user wants to be marked.
      */
-    public void markListMessage(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-
-        System.out.println(task);
+    public String markListMessage(Task task) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nice! I've marked this task as done:\n");
+        sb.append(task);
+        return sb.toString();
     }
     /**
      * Shows message confirming task has been unmarked.
      *
      * @param task Task that user wants to be unmarked
      */
-    public void unmarkListMessage(Task task) {
-        System.out.println("OK, I've marked this task as not done yet:");
-        System.out.println(task);
+    public String unmarkListMessage(Task task) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("OK, I've marked this task as not done yet:\n");
+        sb.append(task);
+        return sb.toString();
     }
     /**
      * Shows message confirming task has been deleted.
      *
-     * @param taskList TaskList containing task that user wants to delete.
+     * @param removedTask Task that user wants to delete.
+     * @param remainingCount Number of tasks left after deletion
      */
-    public void deleteListMessage(TaskList taskList, int taskNumber) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(taskList.getTasks().get(taskNumber));
-        System.out.println("Now you have " + (taskList.size() - 1) + " tasks in the list.");
+    public String deleteListMessage(Task removedTask, int remainingCount) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Noted. I've removed this task:\n");
+        sb.append(removedTask).append("\n");
+        sb.append("Now you have ")
+                .append(remainingCount)
+                .append(remainingCount == 1 ? " task" : " tasks")
+                .append(" in the list.");
+        return sb.toString();
     }
     /**
      * Shows relevant error message
      */
-    public void showErrorMessage(String msg) {
-        System.out.println(msg);
+    public String showErrorMessage(String msg) {
+        return msg;
     }
 
     /**
@@ -109,19 +123,19 @@ public class Ui {
      *
      * @param matches List of tasks that matches users input
      */
-    public void showMatches(List<Task> matches) {
-        if (matches.isEmpty()) {
-            System.out.println("no results found :(");
-        } else {
-            System.out.println("Here are the matching tasks:");
-            for (int i = 0; i < matches.size(); i++) {
-                System.out.println((i + 1) + ". " + matches.get(i));
-            }
+    public String showMatches(List<Task> matches) {
+        if (matches == null || matches.isEmpty()) {
+            return "No results found :(";
         }
+        StringBuilder sb = new StringBuilder("Here are the matching tasks:\n");
+        for (int i = 0; i < matches.size(); i++) {
+            sb.append(i + 1).append(". ").append(matches.get(i)).append("\n");
+        }
+        return sb.toString().trim();
     }
 
-    public void showArchiveMessage() {
-        System.out.println("TaskList successfully archived, TaskList has been cleared!!");
+    public String showArchiveMessage() {
+        return "TaskList successfully archived, TaskList has been cleared!!";
     }
 
 

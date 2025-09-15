@@ -16,12 +16,11 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public boolean run(TaskList taskList, Ui ui) throws PeanutException {
+    public String run(TaskList taskList, Ui ui) throws PeanutException {
         if (args.isBlank()) {
             throw new PeanutException("Please enter a valid word to find!! (e.g find book)");
         }
         List<Task> matched = taskList.match(args);
-        ui.showMatches(matched);
-        return false;
+        return ui.showMatches(matched);
     }
 }

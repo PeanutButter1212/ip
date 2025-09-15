@@ -18,7 +18,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public boolean run(TaskList taskList, Ui ui) throws PeanutException {
+    public String run(TaskList taskList, Ui ui) throws PeanutException {
         if (args.isBlank()) {
             throw new PeanutException("The description/time of deadline cannot be empty!! "
                     + "(e.g deadline read book /by 2019-10-15)");
@@ -42,9 +42,8 @@ public class DeadlineCommand extends Command {
         int sizeBefore = taskList.size();
         Task deadlineTask = new Deadline(description, endDateText);
         taskList.add(deadlineTask);
-        ui.addListMessage(deadlineTask, taskList.size());
         assert taskList.size() == sizeBefore + 1 : "TaskList size should increase by 1";
         assert taskList.getTasks().get(taskList.size() - 1) == deadlineTask : "New task should added to bottom";
-        return false;
+        return ui.addListMessage(deadlineTask, taskList.size());
     }
 }

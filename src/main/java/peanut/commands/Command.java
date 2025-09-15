@@ -18,5 +18,9 @@ public abstract class Command {
      * @return True if the command was executed successfully else false.
      * @throws PeanutException If an error occurs during command execution.
      */
-    public abstract boolean run(TaskList taskList, Ui ui) throws PeanutException;
+    public abstract String run(TaskList taskList, Ui ui) throws PeanutException;
+
+    public boolean isExit() {
+        return false;
+    }
 }

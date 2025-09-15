@@ -14,7 +14,7 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public boolean run(TaskList taskList, Ui ui) throws PeanutException {
+    public String run(TaskList taskList, Ui ui) throws PeanutException {
         if (args.isBlank()) {
             throw new PeanutException("Please add description for todo!! (e.g todo read book)");
         }
@@ -22,9 +22,8 @@ public class TodoCommand extends Command {
         Task todoTask = new ToDo(args);
         int sizeBefore = taskList.size();
         taskList.add(todoTask);
-        ui.addListMessage(todoTask, taskList.size());
         assert taskList.size() == sizeBefore + 1 : "TaskList size should increase by 1";
         assert taskList.getTasks().get(taskList.size() - 1) == todoTask : "New task should added to bottom";
-        return false;
+        return ui.addListMessage(todoTask, taskList.size());
     }
 }

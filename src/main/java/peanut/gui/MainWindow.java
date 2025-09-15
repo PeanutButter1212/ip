@@ -35,6 +35,13 @@ public class MainWindow extends AnchorPane {
     /** Injects the Duke instance */
     public void setDuke(Peanut d) {
         peanut = d;
+        // Show the initial welcome message once at startup using empty input
+        String welcome = peanut.getResponse("");
+        if (!welcome.isBlank()) {
+            dialogContainer.getChildren().add(
+                    DialogBox.getDukeDialog(welcome, dukeImage)
+            );
+        }
     }
 
     /**
@@ -43,6 +50,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+
         String input = userInput.getText();
         String output = peanut.getResponse(input);
         dialogContainer.getChildren().addAll(

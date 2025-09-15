@@ -1,8 +1,5 @@
 package peanut;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import peanut.commands.Command;
 import peanut.parser.Parser;
 import peanut.storage.Storage;
@@ -33,34 +30,28 @@ public class Peanut {
         this.storage = new Storage(filePath);
         this.parser = new Parser();
         this.taskList = new TaskList(storage.load());
-    }
-
-    /**
-     * Runs the welcome command to show welcome message
-     */
-    private void ensureWelcomed() throws PeanutException {
-        if (!hasWelcomed) {
-            ui.welcomeMessage();
-            hasWelcomed = true;
-        }
+        this.hasWelcomed = false;
     }
 
     /**
      * Runs the application event loop until the user exits.
      */
     public void run() {
-        try {
-            ensureWelcomed();
-        } catch (PeanutException e) {
-            ui.showErrorMessage(e.getMessage());
-        }
         boolean exit = false;
+
+        if (!hasWelcomed) {
+            System.out.println(ui.welcomeMessage());
+            hasWelcomed = true;
+        }
+
         while (!exit) {
             String input = ui.readCommand();
             try {
                 Command command = parser.parse(input, taskList, ui, storage);
-                exit = command.run(taskList, ui);
+                String msg = command.run(taskList, ui);
+                System.out.println(msg);
                 storage.save(taskList);
+                exit = command.isExit();
             } catch (PeanutException e) {
                 ui.showErrorMessage(e.getMessage());
             }
@@ -73,28 +64,34 @@ public class Peanut {
      * @param input the input that users provide to chatbot
      */
     public String getResponse(String input) {
-        // Since we use printout for statements we need capture them and turn to string
-        PrintStream originalOut = System.out;
-        ByteArrayOutputStream buf = new ByteArrayOutputStream();
-        PrintStream capture = new PrintStream(buf);
-        System.setOut(capture);
+        StringBuilder sb = new StringBuilder();
 
-        String reply;
-        try {
-            Command command = parser.parse(input, taskList, ui, storage);
-            boolean exit = command.run(taskList, ui);
-            storage.save(taskList);
+        //if first call and no user input then return welcome message
+        if (!hasWelcomed) {
+            hasWelcomed = true;
 
-            reply = buf.toString().trim();
-        } catch (PeanutException e) {
-            reply = e.getMessage();
-        } finally {
-            System.out.flush();
-            System.setOut(originalOut);
+            if (input == null || input.isBlank()) {
+                return ui.welcomeMessage();
+            }
+
+            sb.append(ui.welcomeMessage()).append("\n");
         }
 
-        return reply;
+
+        try {
+            Command command = parser.parse(input, taskList, ui, storage);
+            String msg = command.run(taskList, ui);
+            storage.save(taskList);
+            sb.append(msg);
+
+        } catch (PeanutException e) {
+            sb.append(ui.showErrorMessage(e.getMessage()));
+        }
+
+        return sb.toString();
     }
+
+
 
 
     public static void main(String[] args) {

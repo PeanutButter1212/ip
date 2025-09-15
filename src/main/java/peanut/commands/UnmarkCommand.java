@@ -13,7 +13,7 @@ public class UnmarkCommand extends Command {
 
 
     @Override
-    public boolean run(TaskList taskList, Ui ui) throws PeanutException {
+    public String run(TaskList taskList, Ui ui) throws PeanutException {
         if (args.isBlank()) {
             throw new PeanutException("Please provide a task number for unmark!! (e.g unmark 1)");
         }
@@ -30,9 +30,8 @@ public class UnmarkCommand extends Command {
         }
         int sizeBefore = taskList.size();
         taskList.unmark(unmarkTaskNumber);
-        ui.unmarkListMessage(taskList.getTasks().get(unmarkTaskNumber));
         assert taskList.size() == sizeBefore : "TaskList size should stay the same";
         assert !taskList.getTasks().get(unmarkTaskNumber).getStatus() : "Task must be unmarked";
-        return false;
+        return ui.unmarkListMessage(taskList.getTasks().get(unmarkTaskNumber));
     }
 }
