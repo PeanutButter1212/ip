@@ -139,7 +139,7 @@ public class Storage {
             task = new Deadline(desc, parts[3]);
             break;
         case "E":
-            task = new Event(desc, parts[4], parts[3]);
+            task = new Event(desc, parts[3], parts[4]);
             break;
         default:
             return null;

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a list of tasks users want.
- * Provides methods to add, delete, mark, and unmark tasks.
+ * Represents a list of tasks from users.
+ * Provides methods to add, delete, mark, unmark, list, search, and clear tasks.
  */
 public class TaskList {
-    private List<Task> tasks;
+    private final List<Task> tasks;
     /**
      * Creates a TaskList with existing list of tasks
      *
@@ -82,6 +82,9 @@ public class TaskList {
         return matches;
     }
 
+    /**
+     * Removes all tasks from the list.
+     */
     public void clear() {
         this.tasks.clear();
     }

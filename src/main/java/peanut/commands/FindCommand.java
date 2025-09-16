@@ -7,7 +7,7 @@ import peanut.tasks.Task;
 import peanut.tasks.TaskList;
 import peanut.ui.Ui;
 
-
+/** Represents a command to find tasks by keyword. */
 public class FindCommand extends Command {
     private final String args;
 

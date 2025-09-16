@@ -19,37 +19,40 @@ public class Ui {
      * Creates a new Ui object and initialises scanner to read user input.
      */
     public Ui() {
-
         sc = new Scanner(System.in);
     }
     /**
-     * @return  welcome message when bot starts up.
+     * Returns the greeting shown when the app starts.
+     *
+     * @return The welcome message
      */
     public String welcomeMessage() {
 
         return "Hello! :D I'm Peanut.\nWhat can I do for you?";
     }
     /**
-     * Prints goodbye message when user exits chatbot.
+     * Returns the goodbye shown when the user exits the app.
+     *
+     * @return The goodbye message
      */
     public String byeMessage() {
 
         return "Bye. Hope to see you again soon!";
     }
     /**
-     * Reads commands entered by user.
+     * Reads a single line of input
      *
-     * @return Command line entered by user.
-     */
+     * @return The raw line entered by the user
+     * */
     public String readCommand() {
         return sc.nextLine();
     }
     /**
-     * Shows message confirming task has been added to list.
+     * Builds a message confirming that a task has been added.
      *
-     * @param task The task user adds to list.
-     * @param size Total number of tasks in the list.
-     *
+     * @param task Task that was added
+     * @param size Total number of tasks after adding the task
+     * @return A confirmation message
      */
     public String addListMessage(Task task, int size) {
         StringBuilder sb = new StringBuilder();
@@ -59,9 +62,10 @@ public class Ui {
         return sb.toString();
     }
     /**
-     * Shows entire TaskList in order.
+     * Builds a message listing all tasks in order.
      *
-     * @param tasks The current TaskList.
+     * @param tasks Current TaskList
+     * @return A formatted list of tasks, or a notice if the list is empty
      */
     public String showListMessage(TaskList tasks) {
         if (tasks.size() == 0) {
@@ -74,9 +78,10 @@ public class Ui {
         return sb.toString().trim();
     }
     /**
-     * Shows message confirming task has been marked.
+     * Builds a message confirming that a task has been marked as done.
      *
-     * @param task Task that user wants to be marked.
+     * @param task The task that was marked done
+     * @return A confirmation message
      */
     public String markListMessage(Task task) {
         StringBuilder sb = new StringBuilder();
@@ -85,9 +90,10 @@ public class Ui {
         return sb.toString();
     }
     /**
-     * Shows message confirming task has been unmarked.
+     * Builds a message confirming that a task has been unmarked
      *
-     * @param task Task that user wants to be unmarked
+     * @param task The task that was unmarked
+     * @return A confirmation message
      */
     public String unmarkListMessage(Task task) {
         StringBuilder sb = new StringBuilder();
@@ -96,10 +102,11 @@ public class Ui {
         return sb.toString();
     }
     /**
-     * Shows message confirming task has been deleted.
+     * Builds a message confirming that a task has been deleted.
      *
-     * @param removedTask Task that user wants to delete.
-     * @param remainingCount Number of tasks left after deletion
+     * @param removedTask Task that was removed
+     * @param remainingCount Number of tasks remaining after deletion
+     * @return A formatted confirmation message
      */
     public String deleteListMessage(Task removedTask, int remainingCount) {
         StringBuilder sb = new StringBuilder();
@@ -112,16 +119,20 @@ public class Ui {
         return sb.toString();
     }
     /**
-     * Shows relevant error message
+     * Returns a formatted error message to be rendered by the caller.
+     *
+     * @param msg Error text
+     * @return Error text
      */
     public String showErrorMessage(String msg) {
         return msg;
     }
 
     /**
-     * Displays list of tasks that matches keyword
+     * Builds a message listing tasks that match a search query.
      *
-     * @param matches List of tasks that matches users input
+     * @param matches Tasks that matched the query
+     * @return A formatted list of matches, or a notice if no matches were found
      */
     public String showMatches(List<Task> matches) {
         if (matches == null || matches.isEmpty()) {
@@ -134,6 +145,11 @@ public class Ui {
         return sb.toString().trim();
     }
 
+    /**
+     * Builds a message confirming that the task list has been archived and cleared.
+     *
+     * @return Archive confirmation message
+     */
     public String showArchiveMessage() {
         return "TaskList successfully archived, TaskList has been cleared!!";
     }
