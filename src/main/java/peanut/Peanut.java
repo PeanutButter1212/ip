@@ -37,21 +37,17 @@ public class Peanut {
      * Runs the application event loop until the user exits.
      */
     public void run() {
-        boolean exit = false;
+        boolean shouldExit = false;
+        System.out.println(ui.welcomeMessage());
 
-        if (!hasWelcomed) {
-            System.out.println(ui.welcomeMessage());
-            hasWelcomed = true;
-        }
-
-        while (!exit) {
+        while (!shouldExit) {
             String input = ui.readCommand();
             try {
                 Command command = parser.parse(input, taskList, ui, storage);
                 String msg = command.run(taskList, ui);
                 System.out.println(msg);
                 storage.save(taskList);
-                exit = command.isExit();
+                shouldExit = command.isExit();
             } catch (PeanutException e) {
                 ui.showErrorMessage(e.getMessage());
             }
