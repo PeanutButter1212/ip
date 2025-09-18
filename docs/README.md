@@ -105,6 +105,27 @@ Noted. I've removed this task:
 Now you have 2 tasks in the list.
 
 ```
+## Find
+
+You can search for your tasks by typing:
+
+Example: `find submit`
+
+
+```
+Here are the matching tasks:
+[D][] submit report (by: Sep 20 2025)
+```
+## Exit
+
+You can exit the GUI by typing:
+
+Example: `bye`
+
+
+```
+
+```
 <p align="center" style="color:pink; font-size:18px;">
   Hope you have a great time using <b>Peanut</b> :D
 </p>

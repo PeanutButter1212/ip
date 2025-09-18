@@ -14,7 +14,7 @@ import peanut.tasks.TaskList;
  */
 
 public class Ui {
-    private Scanner sc;
+    private final Scanner sc;
     /**
      * Creates a new Ui object and initialises scanner to read user input.
      */
@@ -55,11 +55,11 @@ public class Ui {
      * @return A confirmation message
      */
     public String addListMessage(Task task, int size) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Got it. I've added this task:\n");
-        sb.append(task).append("\n");
-        sb.append("Now you have ").append(size).append(size == 1 ? " task" : " tasks").append(" in the list.");
-        return sb.toString();
+        StringBuilder message = new StringBuilder();
+        message.append("Got it. I've added this task:\n");
+        message.append(task).append("\n");
+        message.append("Now you have ").append(size).append(size == 1 ? " task" : " tasks").append(" in the list.");
+        return message.toString();
     }
     /**
      * Builds a message listing all tasks in order.
@@ -71,11 +71,11 @@ public class Ui {
         if (tasks.size() == 0) {
             return "Your list is empty.";
         }
-        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+        StringBuilder message = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            sb.append(i + 1).append(". ").append(tasks.getTasks().get(i)).append("\n");
+            message.append(i + 1).append(". ").append(tasks.getTasks().get(i)).append("\n");
         }
-        return sb.toString().trim();
+        return message.toString().trim();
     }
     /**
      * Builds a message confirming that a task has been marked as done.
@@ -84,10 +84,10 @@ public class Ui {
      * @return A confirmation message
      */
     public String markListMessage(Task task) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Nice! I've marked this task as done:\n");
-        sb.append(task);
-        return sb.toString();
+        StringBuilder message = new StringBuilder();
+        message.append("Nice! I've marked this task as done:\n");
+        message.append(task);
+        return message.toString();
     }
     /**
      * Builds a message confirming that a task has been unmarked
@@ -96,10 +96,10 @@ public class Ui {
      * @return A confirmation message
      */
     public String unmarkListMessage(Task task) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("OK, I've marked this task as not done yet:\n");
-        sb.append(task);
-        return sb.toString();
+        StringBuilder message = new StringBuilder();
+        message.append("OK, I've marked this task as not done yet:\n");
+        message.append(task);
+        return message.toString();
     }
     /**
      * Builds a message confirming that a task has been deleted.
@@ -109,14 +109,14 @@ public class Ui {
      * @return A formatted confirmation message
      */
     public String deleteListMessage(Task removedTask, int remainingCount) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Noted. I've removed this task:\n");
-        sb.append(removedTask).append("\n");
-        sb.append("Now you have ")
+        StringBuilder message = new StringBuilder();
+        message.append("Noted. I've removed this task:\n");
+        message.append(removedTask).append("\n");
+        message.append("Now you have ")
                 .append(remainingCount)
                 .append(remainingCount == 1 ? " task" : " tasks")
                 .append(" in the list.");
-        return sb.toString();
+        return message.toString();
     }
     /**
      * Returns a formatted error message to be rendered by the caller.
@@ -138,11 +138,11 @@ public class Ui {
         if (matches == null || matches.isEmpty()) {
             return "No results found :(";
         }
-        StringBuilder sb = new StringBuilder("Here are the matching tasks:\n");
+        StringBuilder message = new StringBuilder("Here are the matching tasks:\n");
         for (int i = 0; i < matches.size(); i++) {
-            sb.append(i + 1).append(". ").append(matches.get(i)).append("\n");
+            message.append(i + 1).append(". ").append(matches.get(i)).append("\n");
         }
-        return sb.toString().trim();
+        return message.toString().trim();
     }
 
     /**

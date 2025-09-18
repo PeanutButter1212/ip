@@ -1,5 +1,8 @@
 package peanut;
 
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
+import javafx.util.Duration;
 import peanut.commands.Command;
 import peanut.parser.Parser;
 import peanut.storage.Storage;
@@ -7,16 +10,15 @@ import peanut.tasks.PeanutException;
 import peanut.tasks.TaskList;
 import peanut.ui.Ui;
 
-
 /**
  * Entry point of the Peanut application.
  */
 
 public class Peanut {
-    private Storage storage;
-    private TaskList taskList;
-    private Ui ui;
-    private Parser parser;
+    private final Storage storage;
+    private final TaskList taskList;
+    private final Ui ui;
+    private final Parser parser;
     private boolean hasWelcomed;
 
     /**
@@ -58,6 +60,7 @@ public class Peanut {
      * Generates a response for the user's chat message.
      *
      * @param input the input that users provide to chatbot
+     * @return The chatbot's reply including welcome message on the first call
      */
     public String getResponse(String input) {
         StringBuilder sb = new StringBuilder();
@@ -79,6 +82,12 @@ public class Peanut {
             String msg = command.run(taskList, ui);
             storage.save(taskList);
             sb.append(msg);
+            // Used the help of chatgpt to make sure users can see message before closing by using a delay
+            if (command.isExit()) {
+                PauseTransition delay = new PauseTransition(Duration.millis(400));
+                delay.setOnFinished(e -> Platform.exit());
+                delay.play();
+            }
 
         } catch (PeanutException e) {
             sb.append(ui.showErrorMessage(e.getMessage()));
@@ -86,8 +95,6 @@ public class Peanut {
 
         return sb.toString();
     }
-
-
 
 
     public static void main(String[] args) {

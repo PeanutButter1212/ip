@@ -25,7 +25,7 @@ import peanut.tasks.ToDo;
  * loading the txt file when run
  */
 public class Storage {
-    private String filePath;
+    private final String filePath;
 
     /**
      * Creates storage object with given filepath
@@ -130,7 +130,7 @@ public class Storage {
         boolean isDone = "1".equals(parts[1]);
         String desc = parts[2];
 
-        Task task = null;
+        Task task;
         switch (type) {
         case "T":
             task = new ToDo(desc);
@@ -145,7 +145,7 @@ public class Storage {
             return null;
         }
 
-        if (task != null && isDone) {
+        if (isDone) {
             task.mark();
         }
         return task;

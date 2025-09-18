@@ -24,15 +24,15 @@ public class MainWindow extends AnchorPane {
 
     private Peanut peanut;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpeg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpeg"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpeg"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Duke instance */
+    /** Injects the Peanut instance */
     public void setDuke(Peanut d) {
         peanut = d;
         // Show the initial welcome message once at startup using empty input
@@ -45,7 +45,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Peanut's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML

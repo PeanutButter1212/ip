@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import peanut.Peanut;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Peanut using FXML.
  */
 public class Main extends Application {
 
@@ -24,7 +24,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setTitle("Peanut");
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(peanut); // inject the Duke instance
+            fxmlLoader.<MainWindow>getController().setDuke(peanut); // inject the Peanut instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
