@@ -124,7 +124,7 @@ Example: `bye`
 
 
 ```
-
+"Bye. Hope to see you again soon!"
 ```
 <p align="center" style="color:pink; font-size:18px;">
   Hope you have a great time using <b>Peanut</b> :D
