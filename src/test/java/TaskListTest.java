@@ -23,7 +23,7 @@ public class TaskListTest {
         Task removedTask = tasks.getTasks().get(1);
         tasks.delete(1);
 
-        assertEquals(tasks.size(), 1);
+        assertEquals(1, tasks.size());
         assertFalse(tasks.getTasks().contains(removedTask));
     }
 
@@ -33,7 +33,7 @@ public class TaskListTest {
         Task addedTask = new ToDo("eat lunch");
         tasks.add(addedTask);
 
-        assertEquals(tasks.size(), 1);
+        assertEquals( 1,tasks.size());
         assertTrue(tasks.getTasks().contains(addedTask));
     }
 }
